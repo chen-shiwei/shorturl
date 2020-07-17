@@ -11,10 +11,6 @@ type Long2ShortArgs struct {
 	Url string `json:"url"`
 }
 
-var (
-	shortUrlServerHost = "http://127.0.0.1:7999/link"
-)
-
 func Long2Short() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -33,7 +29,7 @@ func Long2Short() gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"data": gin.H{
-			"short_url": shortUrlServerHost + "/" + short,
+			"short_url": c.Request.Host + "/link/" + short,
 			"long_url":  args.Url,
 		}, "message": "success"})
 		return
